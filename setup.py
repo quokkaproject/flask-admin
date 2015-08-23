@@ -32,7 +32,7 @@ def grep(attrname):
 
 setup(
     name='quokka-flask-admin',
-    version=grep('__version__'),
+    version='1.3.0',
     url='https://github.com/quokkaproject/flask-admin/',
     license='BSD',
     author='quokkaproject',
