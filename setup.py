@@ -31,13 +31,13 @@ def grep(attrname):
 
 
 setup(
-    name='Flask-Admin',
+    name='quokka-flask-admin',
     version=grep('__version__'),
-    url='https://github.com/flask-admin/flask-admin/',
+    url='https://github.com/quokkaproject/flask-admin/',
     license='BSD',
-    author=grep('__author__'),
-    author_email=grep('__email__'),
-    description='Simple and extensible admin interface framework for Flask',
+    author='quokkaproject',
+    author_email='rochacbruno+quokka@gmail.com',
+    description='Fork of Flask-Admin for QuokkaCMS',
     long_description=desc(),
     packages=find_packages(),
     include_package_data=True,
