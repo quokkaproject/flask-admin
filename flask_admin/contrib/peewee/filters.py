@@ -99,7 +99,7 @@ class FilterInList(BasePeeweeFilter):
         return [v.strip() for v in value.split(',') if v.strip()]
 
     def apply(self, query, value):
-        return query.filter(self.column << value)
+        return query.filter(self.column << (value or [None]))
 
     def operation(self):
         return lazy_gettext('in list')
@@ -108,7 +108,7 @@ class FilterInList(BasePeeweeFilter):
 class FilterNotInList(FilterInList):
     def apply(self, query, value):
         # NOT IN can exclude NULL values, so "or_ == None" needed to be added
-        return query.filter(~(self.column << value) | (self.column >> None))
+        return query.filter(~(self.column << (value or [None])) | (self.column >> None))
 
     def operation(self):
         return lazy_gettext('not in list')
@@ -116,11 +116,13 @@ class FilterNotInList(FilterInList):
 
 # Customized type filters
 class BooleanEqualFilter(FilterEqual, filters.BaseBooleanFilter):
-    pass
+    def clean(self, value):
+        return int(value)
 
 
 class BooleanNotEqualFilter(FilterNotEqual, filters.BaseBooleanFilter):
-    pass
+    def clean(self, value):
+        return int(value)
 
 
 class IntEqualFilter(FilterEqual, filters.BaseIntFilter):
